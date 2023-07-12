@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    inputValue: '',
+                    list: []
+                }
+            },
+            methods: {
+                handleAddItem() {
+                    this.list.push(this.inputValue);
+                    this.inputValue = '';
+                }
+            },
+            template: `
+                <div>
+                    <input v-model="inputValue" />
+                    <button v-on:click="handleAddItem">增加</button>
+                    <ul>
+                        <todo-item
+                          v-for="(item, index) of list"
+                          v-bind:content="item"
+                          v-bind:index="index"
+                        />
+                    </ul>
+                </div>
+            `
+        });
+
+        app.component('todo-item',{
+            props: ['content', 'index'],
+            template: `<li>{{index}}--{{content}}</li>`
+        });
+
+        app.mount('#root');
+    </script>
+</body>
+</html>

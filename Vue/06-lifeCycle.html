@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        // 生命周期函数：在某一时刻会自动执行的函数
+        const app = Vue.createApp({
+            data(){
+                return {
+                    message: 'hello world!'
+                }
+            },
+
+            beforeCreate() {
+                console.log('beforeCreate');
+            },
+
+            created() {
+                console.log('created');
+            },
+
+            beforeMount() {
+                console.log(document.getElementById('root').innerHTML, 'beforeMount');
+            },
+
+            mounted() {
+                console.log(document.getElementById('root').innerHTML, 'mounted');
+
+            },
+
+            beforeUpdate() {
+                console.log(document.getElementById('root').innerHTML, 'beforeUpdate');
+            },
+
+            updated() {
+                console.log(document.getElementById('root').innerHTML, 'updated');
+            },
+
+            beforeUnmount() {
+                console.log(document.getElementById('root').innerHTML, 'beforeUnmount');
+            },
+
+            unmounted() {
+                console.log(document.getElementById('root').innerHTML, 'mounted');
+            },
+
+            template: '<div>{{message}}</div>'
+        });
+
+        const vm = app.mount('#root');
+    </script>
+</body>
+</html>
