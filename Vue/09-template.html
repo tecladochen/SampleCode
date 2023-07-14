@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7 模板语法</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'hello',
+                    htmlMessage: '<strong>world</strong>'
+                }
+            },
+            template: `
+                <div v-bind:title="message">{{message}}</div>
+                <div v-html="htmlMessage" :title="message"></div>
+            `
+        });
+
+        const vm = app.mount('#root');
+    </script>
+</body>
+</html>

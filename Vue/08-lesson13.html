@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson13 双向绑定</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>  
+    <div id="root"></div>
+
+    <script>
+        // 表单元素 input textarea checkbox radio select
+        // 修饰符 lazy number trim
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: 'hello',
+                    selectedList: [],
+                    selected: '',
+                    selectedOption: '',
+                    selectedOptions: [],
+                    options: [{
+                        text: 'A', value: {value: 'A'}
+                    },{
+                        text: 'B', value: {value: 'B'}
+                    },{
+                        text: 'C', value: {value: 'C'}
+                    }
+                    ],
+                    nums: 0
+                }
+            },
+            template: `
+            <div>
+                <input v-model="message"/>
+
+                <textarea v-model="message" />
+
+                <div>
+                    {{selectedList}}
+                    jack <input type="checkbox" v-model="selectedList" value="jack" />
+                    marry <input type="checkbox" v-model="selectedList" value="marry" />
+                    matt <input type="checkbox" v-model="selectedList" value="matt" />
+                </div>
+
+                <div>
+                    {{message}}
+                   <input type="checkbox" v-model="message" true-value="hello" false-value="world">
+                </div>
+
+
+                <div>
+                    {{selected}}
+                    jack <input type="radio" v-model="selected" value="jack" />
+                    marry <input type="radio" v-model="selected" value="marry" />
+                    matt <input type="radio" v-model="selected" value="matt" />
+                </div>
+
+                <div>
+                    {{selectedOption}}
+                    <select v-model="selectedOption">
+                        <option disabled></option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+
+                <div>
+                    {{selectedOptions}}
+                    <select v-model="selectedOptions" multiple>
+                        <option v-for="item in options" :value="item.value">{{item.text}}</option>
+                    </select>
+                </div>
+
+                <div>
+                    {{message}}
+                    <input v-model.lazy="message" />
+                    {{nums}}
+                    <input v-model.number="nums" />
+                    {{message}}
+                    <input v-model.trim="message" />
+                </div>
+
+            </div>
+            `
+        });
+
+        const vm = app.mount('#root');
+    </script>
+</body>
+</html>

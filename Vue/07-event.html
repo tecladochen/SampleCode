@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson12 - Vue 事件相关知识点</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script>    
+        // 事件绑定形式
+        // 事件修饰符 stop prevent self once capture
+        // 按键修饰符 enter tab delete esc up down left right backspace
+        // 鼠标修饰符 left right middle
+        // 精确修饰符 exact
+        const app = Vue.createApp({
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                handleBtnClick(event) {
+                    this.counter += 1;
+                },
+                handleAddNumber(num, event){
+                    this.counter += num;
+                },
+                handleAlert1(){
+                    alert(1);
+                },
+                handleAlert2(){
+                    alert(2);
+                },
+                handleDivAlert(){
+                    alert('divEvent');
+                },
+                handleKeyDown(event) {
+                    console.log(event);
+                },
+                handleClick() {
+                    console.log('click');
+                }
+            },
+            template: `
+                <div>
+                    {{counter}}
+                    <button v-on:click="handleBtnClick">增加1</button>
+
+                    <button @click="counter += 1">增加2</button>
+
+                    <button @click="handleAddNumber(3, $event)">增加3</button>
+
+                    <button @click="handleAlert1(), handleAlert2()">多函数</button>
+
+                    <div @click="handleDivAlert">
+                        <button @click.stop="handleBtnClick">增加</button>
+                    </div>
+
+                    <div @click.self="handleDivAlert">
+                        <button @click="handleBtnClick">增加</button>
+                    </div>
+
+                    <div @click.prevent="handleDivAlert">
+                        <button @click="handleBtnClick">增加</button>
+                    </div>
+
+                    <div @click.capture="handleDivAlert">
+                        <button @click="handleBtnClick">增加</button>
+                    </div>
+
+                    <div @click.once="handleDivAlert">
+                        <button @click="handleBtnClick">增加</button>
+                    </div>
+
+                    <div>
+                        <input @keydown.backspace="handleKeyDown"/>
+                    </div>
+
+                    <div>
+                        <div @click.middle="handleClick">点击事件</div>
+                    </div>
+
+                    <div >
+                        <button @click.ctrl.exact="handleBtnClick">增加</button>
+                    </div>
+                </div>
+            `
+        }).mount('#root');
+    </script>
+    
+</body>
+</html>
