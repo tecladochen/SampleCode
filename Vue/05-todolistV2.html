@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
+
 <body>
     <div id="root"></div>
 
     <script>
+        // {{}} 插值表达式
+        // v-html  innerHtml类似，识别html标签
+        // v-bind (:) 绑定属性，有简写
+        // v-on (@) 绑定事件，有简写
+        // 动态参数 []  动态指定属性名
+        // 修饰符 @click.prevent
+
+        // data & methods & computed & watcher
         const app = Vue.createApp({
             data() {
                 return {
@@ -38,7 +48,7 @@
             `
         });
 
-        app.component('todo-item',{
+        app.component('todo-item', {
             props: ['content', 'index'],
             template: `<li>{{index}}--{{content}}</li>`
         });
@@ -46,4 +56,5 @@
         app.mount('#root');
     </script>
 </body>
+
 </html>
